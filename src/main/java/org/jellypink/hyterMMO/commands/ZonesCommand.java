@@ -22,7 +22,7 @@ import org.bukkit.util.BlockVector;
 import org.example.hyterMMO.hyterMMO;
 import org.example.hyterMMO.utils.MessageUtils;
 
-public class ZonesCommand implements CommandExecutor {
+public class ZonesCommand {
 
     private final hyterMMO plugin;
 
@@ -30,21 +30,13 @@ public class ZonesCommand implements CommandExecutor {
         this.plugin = plugin;
     }
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
-
-        if(!(sender instanceof Player)) {
-            sender.sendMessage(MessageUtils.ConsoleMessage());
-            return true;
-        }
-
-        Player player = (Player) sender;
-        if(args.length == 0) {
+    public void execute(Player player, String[] args) {
+        if (args.length < 2) {
             SendHelp(player);
-            return true;
+            return;
         }
 
-        String SubCommand = args[0].toLowerCase();
+        String SubCommand = args[1].toLowerCase();
 
         switch(SubCommand) {
             case "create":
@@ -62,12 +54,12 @@ public class ZonesCommand implements CommandExecutor {
                 break;
         }
 
-        return true;
+        return;
     }
 
     private void handleCreate(Player player, String[] args) {
-        if (player.hasPermission("hyterMMO.admin.zcreate")) {
-            player.sendMessage(MessageUtils.ConsoleMessage());
+        if (!player.hasPermission("hyterMMO.admin.zcreate")) {
+            player.sendMessage(MessageUtils.getColoredMessage("&cYou do not have permission to use this command!"));
             return;
         }
 
@@ -133,9 +125,9 @@ public class ZonesCommand implements CommandExecutor {
 
 
     private void SendHelp(Player player) {
-        player.sendMessage(MessageUtils.getColoredMessage("Zones Help"));
-        player.sendMessage(MessageUtils.getColoredMessage("--"));
-        player.sendMessage(MessageUtils.getColoredMessage("--"));
-        player.sendMessage(MessageUtils.getColoredMessage("--"));
+        player.sendMessage(MessageUtils.getColoredMessage("&6====== &bZones Help &6======"));
+        player.sendMessage(MessageUtils.getColoredMessage("&a/hmmo z create &7- Gestión de regiones del MMO"));
+        player.sendMessage(MessageUtils.getColoredMessage("&a/hmmo z delete &7- Gestión de monstruos personalizados"));
+        player.sendMessage(MessageUtils.getColoredMessage("&a/hmmo z list &7- Gestión de minería"));
     }
 }

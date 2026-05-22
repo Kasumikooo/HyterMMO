@@ -25,6 +25,6 @@ public final class hyterMMO extends JavaPlugin {
     }
 
     public void registerCommands(){
-        this.getCommand("Zones").setExecutor(new ZonesCommand(this));
+        this.getCommand("hmmo").setExecutor(new HMMOCommand(this));
     }
 }
