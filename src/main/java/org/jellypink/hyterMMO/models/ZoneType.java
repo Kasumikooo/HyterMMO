@@ -1,15 +1,16 @@
 package org.jellypink.hyterMMO.models;
 
-public enum ExternalZoneType {
+public enum ZoneType {
 
     GREEN("&aGreen"),
     YELLOW("&eYellow"),
     RED("&cRed"),
-    BLACK("&8Black");
+    BLACK("&8Black"),
+    CITY("&bCity");
 
-    private final String displayName;
+    public final String displayName;
 
-    ExternalZoneType(String displayName) {
+    ZoneType(String displayName) {
         this.displayName = displayName;
     }
 
@@ -17,8 +18,8 @@ public enum ExternalZoneType {
         return displayName;
     }
 
-    public static ExternalZoneType fromString(String text) {
-        for (ExternalZoneType type : ExternalZoneType.values()) {
+    public static ZoneType fromString(String text) {
+        for (ZoneType type : ZoneType.values()) {
             if (type.name().equalsIgnoreCase(text)) {
                 return type;
             }

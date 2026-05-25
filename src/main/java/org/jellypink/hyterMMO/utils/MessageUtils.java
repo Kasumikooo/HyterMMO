@@ -1,8 +1,8 @@
-package org.example.hyterMMO.utils;
+package org.jellypink.hyterMMO.utils;
 
 import org.bukkit.ChatColor;
 
-import static org.example.hyterMMO.hyterMMO.prefix;
+import static org.jellypink.hyterMMO.Main.prefix;
 
 public class MessageUtils {
 

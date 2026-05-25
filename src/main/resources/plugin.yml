@@ -1,20 +1,15 @@
 name: HyterMMO
 version: '${version}'
 author: PinkJelly/Kasumiko
-main: org.example.hyterMMO.hyterMMO
+main: org.jellypink.hyterMMO.Main
 api-version: '1.21'
 depend: [WorldEdit, WorldGuard]
 
 commands:
-  HMO:
-    description: principal command
-    aliases:
-      - HyterMMO
-  Zones:
-    description: "Manage regions"
-    usage: "/hmmo z <create|delete|flag|list>"
-    aliases: [ z, zones, zone ,zo ]
-    permission-message: "You do not have permission to use this command."
+  hmmo:
+    description: Principal command.
+    usage: "/hmmo <command>"
+    aliases: [ hmmocore, hmmo ]
 
 permissions:
   hyterMMO.admin.zcreate:

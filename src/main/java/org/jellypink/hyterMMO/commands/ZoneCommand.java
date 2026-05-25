@@ -1,5 +1,6 @@
-package org.jellypink.hyterMMO.commands.RegionsCommands;
+package org.jellypink.hyterMMO.commands;
 
+import com.ibm.icu.impl.ICULocaleService;
 import com.sk89q.worldedit.IncompleteRegionException;
 import com.sk89q.worldedit.LocalSession;
 import com.sk89q.worldedit.WorldEdit;
@@ -19,19 +20,20 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
+
 import org.jellypink.hyterMMO.Main;
-
 import org.jellypink.hyterMMO.utils.MessageUtils;
-import org.jellypink.hyterMMO.models.ExternalZoneType;
+import org.jellypink.hyterMMO.models.ZoneType;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
-public class ExternalZones {
+public class ZoneCommand {
 
-    public List<String> onTabComplete(String[] args) {
+    public static List<String> onTabComplete(String[] args) {
 
         final List<String> validArguments = new ArrayList<>();
 
@@ -44,7 +46,7 @@ public class ExternalZones {
             if (args.length == 4) {
                 String currentArg = (args.length == 4) ? args[3] : "";
 
-                StringUtil.copyPartialMatches(currentArg, List.of("green", "yellow", "red", "black"), validArguments);
+                StringUtil.copyPartialMatches(currentArg, List.of("green", "yellow", "red", "black", "city"), validArguments);
                 return validArguments;
             }
         }
@@ -53,7 +55,7 @@ public class ExternalZones {
 
     private final Main plugin;
 
-    public ExternalZones(Main plugin) {
+    public ZoneCommand(Main plugin) {
         this.plugin = plugin;
     }
 
@@ -72,6 +74,7 @@ public class ExternalZones {
                 break;
             case "delete":
                 // comandos
+                handleDelete(player, args);
                 break;
             case "list":
                 // comandos
@@ -99,9 +102,9 @@ public class ExternalZones {
         String regionId = args[2];
         String zoneTypeInput = args[3];
 
-        ExternalZoneType externalZoneType = ExternalZoneType.fromString(zoneTypeInput);
-        if (externalZoneType == null) {
-            player.sendMessage(MessageUtils.getColoredMessage("&cInvalid or unsupported zone type. (green, yellow, red, black)"));
+        ZoneType zoneType = ZoneType.fromString(zoneTypeInput);
+        if (zoneType == null) {
+            player.sendMessage(MessageUtils.getColoredMessage("&cInvalid or unsupported zone type. (green, yellow, red, black, city)"));
             return;
         }
 
@@ -138,12 +141,12 @@ public class ExternalZones {
         ProtectedRegion region = new ProtectedCuboidRegion(regionId, min, max);
 
         // call ZoneMethod
-        ZoneMethod(region, externalZoneType);
+        ZoneMethod(region, zoneType);
 
         regionManager.addRegion(region);
         try {
             regionManager.save();
-            player.sendMessage(MessageUtils.getColoredMessage("&aSuccessfully created region " + regionId + " as " + externalZoneType.getDisplayName() + "&a!"));
+            player.sendMessage(MessageUtils.getColoredMessage("&aSuccessfully created region " + regionId + " as " + zoneType.getDisplayName() + "&a!"));
         } catch (Exception ex) {
             ex.printStackTrace();
             player.sendMessage(MessageUtils.getColoredMessage("&cAn error occurred while saving the region."));
@@ -153,7 +156,7 @@ public class ExternalZones {
 
     // ZoneMethod
 
-    private void ZoneMethod(ProtectedRegion region, ExternalZoneType type) {
+    private void ZoneMethod(ProtectedRegion region, ZoneType type) {
         String greetingsMessage = MessageUtils.getColoredMessage("&aWelcome to the " + region.getId() + " " + type.getDisplayName() + " &azone!");
         region.setFlag(Flags.GREET_MESSAGE, greetingsMessage);
 
@@ -182,6 +185,12 @@ public class ExternalZones {
             case BLACK:
                 region.setFlag(Flags.SNOWMAN_TRAILS, StateFlag.State.ALLOW);
                 region.setFlag(Flags.PVP, StateFlag.State.ALLOW);
+                region.setFlag(Flags.BLOCK_BREAK, StateFlag.State.DENY);
+                region.setFlag(Flags.BLOCK_PLACE, StateFlag.State.DENY);
+                break;
+            case CITY:
+                region.setFlag(Flags.SNOWMAN_TRAILS, StateFlag.State.ALLOW);
+                region.setFlag(Flags.PVP, StateFlag.State.DENY);
                 region.setFlag(Flags.BLOCK_BREAK, StateFlag.State.DENY);
                 region.setFlag(Flags.BLOCK_PLACE, StateFlag.State.DENY);
                 break;
@@ -247,7 +256,7 @@ public class ExternalZones {
 
     // Delete command
 
-    private void handleDeleteCommand(Player player, String[] args) {
+    private void handleDelete(Player player, String[] args) {
         if (!player.hasPermission("hyterMMO.admin.delete")) {
             player.sendMessage(MessageUtils.getColoredMessage("&cYou do not have permission to use this command."));
             return;

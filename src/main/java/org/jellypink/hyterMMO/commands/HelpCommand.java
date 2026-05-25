@@ -1,17 +1,17 @@
-package org.example.hyterMMO.commands;
+package org.jellypink.hyterMMO.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.example.hyterMMO.hyterMMO;
-import org.example.hyterMMO.utils.MessageUtils;
+import org.jellypink.hyterMMO.Main;
+import org.jellypink.hyterMMO.utils.MessageUtils;
 
 public class HelpCommand implements CommandExecutor {
 
-    private final hyterMMO plugin;
+    private final Main plugin;
 
-    public HelpCommand(hyterMMO plugin) {
+    public HelpCommand(Main plugin) {
         this.plugin = plugin;
     }
 

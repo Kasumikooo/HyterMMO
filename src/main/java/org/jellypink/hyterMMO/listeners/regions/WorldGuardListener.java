@@ -1,4 +1,4 @@
-package org.example.hyterMMO.listeners.regions;
+package org.jellypink.hyterMMO.listeners.regions;
 
 public class WorldGuardListener {
 }
