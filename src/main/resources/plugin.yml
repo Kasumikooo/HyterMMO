@@ -1,15 +1,22 @@
 name: HyterMMO
 version: '${version}'
 author: PinkJelly/Kasumiko
+website: https://github.com/Kasumikooo/HyterMMO
+
 main: org.jellypink.hyterMMO.Main
 api-version: '1.21'
 depend: [WorldEdit, WorldGuard]
+softdepend: [PlaceholderAPI]
 
 commands:
   hmmo:
     description: Principal command.
     usage: "/hmmo <command>"
     aliases: [ hmmocore, hmmo ]
+  pvp:
+    description: You can enable and Disable your PVP Mode
+    usage: "/pvp"
+    aliases: [ pvp ]
 
 permissions:
   hyterMMO.admin.zcreate:

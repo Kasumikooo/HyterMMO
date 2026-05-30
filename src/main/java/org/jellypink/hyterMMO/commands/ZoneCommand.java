@@ -162,20 +162,22 @@ public class ZoneCommand {
 
         switch (type) {
             case GREEN:
+                region.setFlag(Main.GREEN_ZONE, StateFlag.State.ALLOW);
                 region.setFlag(Flags.SNOWMAN_TRAILS, StateFlag.State.ALLOW);
-                region.setFlag(Flags.PVP, StateFlag.State.DENY);
                 region.setFlag(Flags.BLOCK_BREAK, StateFlag.State.DENY);
+                region.setFlag(Flags.PVP, StateFlag.State.ALLOW);
                 region.setFlag(Flags.BLOCK_PLACE, StateFlag.State.DENY);
                 break;
 
             case YELLOW:
-                region.setFlag(Flags.SNOWMAN_TRAILS, StateFlag.State.ALLOW);
-                region.setFlag(Flags.PVP, StateFlag.State.DENY);
+                region.setFlag(Main.YELLOW_ZONE, StateFlag.State.ALLOW);
                 region.setFlag(Flags.BLOCK_BREAK, StateFlag.State.DENY);
+                region.setFlag(Flags.PVP, StateFlag.State.ALLOW);
                 region.setFlag(Flags.BLOCK_PLACE, StateFlag.State.DENY);
                 break;
 
             case RED:
+                region.setFlag(Main.RED_ZONE, StateFlag.State.ALLOW);
                 region.setFlag(Flags.SNOWMAN_TRAILS, StateFlag.State.ALLOW);
                 region.setFlag(Flags.PVP, StateFlag.State.ALLOW);
                 region.setFlag(Flags.BLOCK_BREAK, StateFlag.State.DENY);
@@ -183,15 +185,17 @@ public class ZoneCommand {
                 break;
 
             case BLACK:
+                region.setFlag(Main.BLACK_ZONE, StateFlag.State.ALLOW);
                 region.setFlag(Flags.SNOWMAN_TRAILS, StateFlag.State.ALLOW);
                 region.setFlag(Flags.PVP, StateFlag.State.ALLOW);
                 region.setFlag(Flags.BLOCK_BREAK, StateFlag.State.DENY);
                 region.setFlag(Flags.BLOCK_PLACE, StateFlag.State.DENY);
                 break;
             case CITY:
+                region.setFlag(Main.CITY_ZONE, StateFlag.State.ALLOW);
                 region.setFlag(Flags.SNOWMAN_TRAILS, StateFlag.State.ALLOW);
-                region.setFlag(Flags.PVP, StateFlag.State.DENY);
                 region.setFlag(Flags.BLOCK_BREAK, StateFlag.State.DENY);
+                region.setFlag(Flags.PVP, StateFlag.State.ALLOW);
                 region.setFlag(Flags.BLOCK_PLACE, StateFlag.State.DENY);
                 break;
         }
