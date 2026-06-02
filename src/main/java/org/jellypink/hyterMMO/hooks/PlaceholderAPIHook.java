@@ -5,12 +5,11 @@ import com.sk89q.worldedit.util.Location;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
-import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import org.jellypink.hyterMMO.listeners.player.ZoneFlagType;
+import org.jellypink.hyterMMO.models.ZoneFlagType;
 import org.jellypink.hyterMMO.utils.MessageUtils;
 
 import javax.annotation.Nullable;

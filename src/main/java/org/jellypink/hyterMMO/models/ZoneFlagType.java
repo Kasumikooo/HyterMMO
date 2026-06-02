@@ -1,6 +1,5 @@
-package org.jellypink.hyterMMO.listeners.player;
+package org.jellypink.hyterMMO.listeners.regions;
 
-import com.sk89q.worldguard.*;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
